@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "548020451092",
+    "project_id": "androidpushnotificaties-403a0",
+    "storage_bucket": "androidpushnotificaties-403a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548020451092:android:d7e6b406f1b00d5c3df401",
+        "android_client_info": {
+          "package_name": "com.example.iiatimd_charsper_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548020451092-q3d2d6f3u74ks5al3809lavra1rsb34s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVY8orp3nVHN-sOBEon6Rc0tSF_86DC8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548020451092-q3d2d6f3u74ks5al3809lavra1rsb34s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,120 @@
 <resources>
-    <string name="app_name">AnimalCrossingFront</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">IIATIMD_Charsper_App</string>
+    <string name="tab_text_1">Bugs</string>
+    <string name="tab_text_2">Fish</string>
+    <string name="tab_text_3">Sea Creatures</string>
+
+    <!-- activity_main.xml -->
+    <string name="title_main">Critter Library</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+
+    <!-- fragment_bugs_layout.xml -->
+    <string-array name="bugs_name_array">
+        <item>Tarantula</item>
+        <item>Ladybug</item>
+        <item>Scorpion</item>
+        <item>Wasp</item>
+    </string-array>
+
+    <string-array name="bugs_location_array">
+        <item>Tarantula Location</item>
+        <item>Ladybug Location</item>
+        <item>Scorpion Location</item>
+        <item>Wasp Location</item>
+    </string-array>
+
+    <string-array name="bugs_month_array">
+        <item>Tarantula Month</item>
+        <item>Ladybug Month</item>
+        <item>Scorpion Month</item>
+        <item>Wasp Month</item>
+    </string-array>
+
+    <string-array name="bugs_time_array">
+        <item>Tarantula Time</item>
+        <item>Ladybug Time</item>
+        <item>Scorpion Time</item>
+        <item>Wasp Time</item>
+    </string-array>
+
+    <string-array name="bugs_price_array">
+        <item>Tarantula Price</item>
+        <item>Ladybug Price</item>
+        <item>Scorpion Price</item>
+        <item>Wasp Price</item>
+    </string-array>
+
+    <!-- fragment_seacreature_layout.xml -->
+    <string-array name="seacreature_name_array">
+        <item>Seaweed</item>
+        <item>Mussel</item>
+        <item>Whelk</item>
+        <item>Octopus</item>
+    </string-array>
+
+    <string-array name="seacreature_location_array">
+        <item>Seaweed Location</item>
+        <item>Mussel Location</item>
+        <item>Whelk Location</item>
+        <item>Octopus Location</item>
+    </string-array>
+
+    <string-array name="seacreature_month_array">
+        <item>Seaweed Month</item>
+        <item>Mussel Month</item>
+        <item>Whelk Month</item>
+        <item>Octopus Month</item>
+    </string-array>
+
+    <string-array name="seacreature_time_array">
+        <item>Seaweed Time</item>
+        <item>Mussel Time</item>
+        <item>Whelk Time</item>
+        <item>Octopus Time</item>
+    </string-array>
+
+    <string-array name="seacreature_price_array">
+        <item>Seaweed Price</item>
+        <item>Mussel Price</item>
+        <item>Whelk Price</item>
+        <item>Octopus Price</item>
+    </string-array>
+
+    <!-- fragment_fish_layout.xml -->
+    <string-array name="fish_name_array">
+        <item>Bass</item>
+        <item>Koi</item>
+        <item>Frog</item>
+        <item>Char</item>
+    </string-array>
+
+    <string-array name="fish_location_array">
+        <item>Bass Location</item>
+        <item>Koi Location</item>
+        <item>Frog Location</item>
+        <item>Char Location</item>
+    </string-array>
+
+    <string-array name="fish_month_array">
+        <item>Bass Month</item>
+        <item>Koi Month</item>
+        <item>Frog Month</item>
+        <item>Char Month</item>
+    </string-array>
+
+    <string-array name="fish_time_array">
+        <item>Bass Time</item>
+        <item>Koi Time</item>
+        <item>Frog Time</item>
+        <item>Char Time</item>
+    </string-array>
+
+    <string-array name="fish_price_array">
+        <item>Bass Price</item>
+        <item>Koi Price</item>
+        <item>Frog Price</item>
+        <item>Char Price</item>
+    </string-array>
+
 </resources>
