@@ -27,17 +27,18 @@ public class Critters {
     @ColumnInfo
     private String donated;
 
-    public Critters(int id, String species, String name, String image, String location, String price, String month, String time, String donated) {
-        this.id = id;
-        this.species = species;
-        this.name = name;
-        this.image = image;
-        this.location = location;
-        this.price = price;
-        this.month = month;
-        this.time = time;
-        this.donated = donated;
-    }
+//    public Critters(int id, String species, String name, String image, String location, String price, String month, String time, String donated) {
+//        this.id = id;
+//        this.species = species;
+//        this.name = name;
+//        this.image = image;
+//        this.location = location;
+//        this.price = price;
+//        this.month = month;
+//        this.time = time;
+//        this.donated = donated;
+//    }
+
 
     public int getId() {
         return id;
@@ -110,4 +111,7 @@ public class Critters {
     public void setDonated(String donated) {
         this.donated = donated;
     }
+
+
+
 }

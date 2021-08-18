@@ -12,29 +12,62 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false">
+
+
         <activity
             android:name=".StartActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+
+<!--        <activity android:name=".MainActivity"           >-->
+<!--        </activity>-->
+
+
+
+        <activity android:name=".CrittersDingen.BugActivity" >
+        </activity>
+
+        <activity android:name=".CrittersDingen.FishActivity">
+        </activity>
+
+        <activity android:name=".CrittersDingen.SeaCreaturesActivity" >
+        </activity>
+
+        <activity android:name=".TrackerActivity"  >
+        </activity>
+
+
+
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+
+        <service
+            android:name="com.example.animalcrossingfront.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </activity>
+        </service>
 
-       <activity
-            android:name=".MainActivity">
-        </activity>
-
-        <activity
-            android:name=".RegisterActivity">
-        </activity>
-
-        <activity
-            android:name=".LoginActivity">
-        </activity>
 
     </application>
 

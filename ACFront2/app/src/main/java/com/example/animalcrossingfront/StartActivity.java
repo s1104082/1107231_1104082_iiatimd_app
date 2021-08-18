@@ -30,8 +30,6 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     public void toLoginScreen(){

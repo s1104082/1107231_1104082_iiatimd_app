@@ -1,39 +1,39 @@
 package com.example.animalcrossingfront;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-
-import com.example.animalcrossingfront.ui.main.SectionsPagerAdapter;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-    ViewPager viewPager = findViewById(R.id.view_pager);
-    viewPager.setAdapter(sectionsPagerAdapter);
-    TabLayout tabs = findViewById(R.id.tabs);
-    tabs.setupWithViewPager(viewPager);
-    FloatingActionButton fab = findViewById(R.id.fab);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-    fab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
-    });
+//        //button to go to second screen
+//        Button toSecondScreenButton = findViewById(R.id.buttonLogin);
+//        toSecondScreenButton.setOnClickListener((OnClickListener) this);
+
+    }
+    public void onClick(View v){
+        //to give data to other screen
+
+        Bundle bundleForSecondScreen = new Bundle();
+        String name = "User";
+        bundleForSecondScreen.putString("name", name);
+
+
+        Intent toNextScreenIntent = new Intent(this, TrackerActivity.class);
+        toNextScreenIntent.putExtras(bundleForSecondScreen);
+        startActivity(toNextScreenIntent);
+    }
+
 }
-}
+
+

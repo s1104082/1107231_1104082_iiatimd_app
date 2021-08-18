@@ -17,6 +17,10 @@ public class User  {
 
     }
 
+
+    public User(String string, String string1) {
+    }
+
     public String getUsername() { return username; }
 
     public String getEmail() { return email; }

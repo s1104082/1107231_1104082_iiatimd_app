@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 
 public class UserAuth {
     private static UserAuth instance;
-    private Context context;
+    private final Context context;
 
     private String username;
     private String email;
@@ -20,8 +21,8 @@ public class UserAuth {
     private User user;
     private final String userData = "userData";
 
-    private UserAuth(Context ctx) {
-        this.context = ctx;
+    private UserAuth(Context context) {
+        this.context = context;
     }
 
     //singleton
@@ -31,6 +32,8 @@ public class UserAuth {
         }
         return instance;
     }
+
+
 
     public void setUsername(String username) {
         Log.d("setUsername: ", String.valueOf(username));
@@ -92,23 +95,6 @@ public class UserAuth {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void storeInSharedPrefs(User userObj){
-        Log.d("storeInSharedPrefs: ", userObj.getUsername());
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(userObj);
-        prefsEditor.putString(userData, json);
-        prefsEditor.commit();
-    }
-
-    public User retrieveFromSharedPrefs(String key){
-        Gson gson = new Gson();
-        String json = mPrefs.getString(key, "");
-        User userObj = gson.fromJson(json, User.class);
-        Log.d("retrieveFromPrefs: ", userObj.getUsername());
-        return userObj;
     }
 
 
