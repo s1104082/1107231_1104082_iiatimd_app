@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FragmentSeaCreatures extends Fragment {
+public class FragmentSeaCreatures extends Fragment implements FragmentAdapter.OnNoteListener {
 
     Context thiscontext;
 
@@ -36,13 +36,18 @@ public class FragmentSeaCreatures extends Fragment {
         recyclerView = rootView.findViewById(R.id.RecyclerView);
 
         thiscontext = container.getContext();
-        FragmentAdapter myAdapter = new FragmentAdapter(thiscontext, s1, s2, s3, s4, s5, seacreatureimages);
+        FragmentAdapter myAdapter = new FragmentAdapter(thiscontext, s1, s2, s3, s4, s5, seacreatureimages, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
 
 
         return rootView;
 
+
+    }
+
+    @Override
+    public void onNoteClick(int position) {
 
     }
 }

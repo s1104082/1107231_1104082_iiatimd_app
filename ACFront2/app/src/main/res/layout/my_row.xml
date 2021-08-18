@@ -34,6 +34,17 @@
                 app:layout_constraintVertical_bias="0.478"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <ImageView
+                android:id="@+id/CheckmarkView"
+                android:layout_width="127dp"
+                android:layout_height="124dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ImageView"
+                app:layout_constraintEnd_toEndOf="@+id/ImageView"
+                app:layout_constraintStart_toStartOf="@+id/ImageView"
+                app:layout_constraintTop_toTopOf="@+id/ImageView"
+                app:layout_constraintVertical_bias="1.0"
+                tools:srcCompat="@drawable/checkmark" />
+
             <TextView
                 android:id="@+id/name_text"
                 android:layout_width="wrap_content"

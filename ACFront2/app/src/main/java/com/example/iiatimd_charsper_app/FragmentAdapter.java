@@ -15,7 +15,9 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
     int images[];
     Context context;
 
-    public FragmentAdapter(Context ct, String s1[], String s2[], String s3[], String s4[], String s5[], int img[]){
+    private OnNoteListener mOnNoteListener;
+
+    public FragmentAdapter(Context ct, String s1[], String s2[], String s3[], String s4[], String s5[], int img[], OnNoteListener onNoteListener){
         context = ct;
         data1 = s1;
         data2 = s2;
@@ -23,6 +25,8 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
         data4 = s4;
         data5 = s5;
         images = img;
+
+        this.mOnNoteListener = onNoteListener;
     }
 
     @NonNull
@@ -30,7 +34,7 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
     public FragmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.my_row, parent, false);
-        return new FragmentViewHolder(view);
+        return new FragmentViewHolder(view, mOnNoteListener);
     }
 
     @Override
@@ -41,6 +45,8 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
         holder.myText4.setText(data4[position]);
         holder.myText5.setText(data5[position]);
         holder.myImage.setImageResource(images[position]);
+
+
     }
 
     @Override
@@ -48,12 +54,13 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
         return data1.length;
     }
 
-    public class FragmentViewHolder extends RecyclerView.ViewHolder{
+    public class FragmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView myText1, myText2, myText3, myText4, myText5;
         ImageView myImage;
+        OnNoteListener onNoteListener;
 
-        public FragmentViewHolder(@NonNull View itemView) {
+        public FragmentViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.name_text);
             myText2 = itemView.findViewById(R.id.location_text);
@@ -61,6 +68,18 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.Fragme
             myText4 = itemView.findViewById(R.id.time_text);
             myText5 = itemView.findViewById(R.id.price_text);
             myImage = itemView.findViewById(R.id.ImageView);
+
+            this.onNoteListener = onNoteListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 }
