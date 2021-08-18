@@ -2,9 +2,11 @@ package com.example.iiatimd_charsper_app;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +50,13 @@ public class FragmentSeaCreatures extends Fragment implements FragmentAdapter.On
 
     @Override
     public void onNoteClick(int position) {
+        Log.d("TAG", "onNoteClick: pos"+ position);
 
+        ImageView imageView = (ImageView) getActivity().findViewById(R.id.ImageView);
+        if (imageView.getVisibility() == View.VISIBLE){
+            imageView.setVisibility(View.INVISIBLE);
+        } else{
+            imageView.setVisibility(View.VISIBLE);
+        }
     }
 }
