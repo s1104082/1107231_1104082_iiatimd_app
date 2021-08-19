@@ -17,6 +17,7 @@ public class CritterRepository {
     private LiveData<List<Critters>> allBugs;
     private LiveData<List<Critters>> allFish;
     private LiveData<List<Critters>> allSeaCreatures;
+    private LiveData<List<Critters>> allDonated;
 
     public CritterRepository(Application application){
         CrittersAppDatabase database = CrittersAppDatabase.getInstance(application);
@@ -25,6 +26,7 @@ public class CritterRepository {
         allBugs = crittersDAO.getAllBugs();
         allFish = crittersDAO.getAllFish();
         allSeaCreatures = crittersDAO.getAllSeaCreatures();
+        allDonated = crittersDAO.getAllDonated();
     }
 
     public LiveData<List<Critters>> getAllCritters(){ return allCritters; }
@@ -33,17 +35,17 @@ public class CritterRepository {
     public LiveData<List<Critters>> getAllFish(){ return allFish; }
 
     public LiveData<List<Critters>> getAllSeaCreatures(){ return allSeaCreatures; }
+    public LiveData<List<Critters>> getAllDonated(){ return allDonated; }
 
     public void insert(Critters critters){
 //            CrittersAppDatabase.databaseWriteExecutor.execute(() -> {crittersDAO.insertCritters(critters);});
         new InsertCritterAsyncTask(crittersDAO).execute(critters);
     }
 
-    public void update(Critters critters){
-        crittersDAO.update(critters);
-
+    public void updateDonated(int crittersId){
+        new UpdateCritterAsyncTask(crittersDAO, crittersId).execute();
+//        crittersDAO.updateDonated(crittersId);
     }
-
 
 
     private static class InsertCritterAsyncTask extends AsyncTask<Critters, Void, Void> {
@@ -64,16 +66,22 @@ public class CritterRepository {
     private static class UpdateCritterAsyncTask extends AsyncTask<Critters, Void, Void> {
 
         private CrittersDAO crittersDOA;
+        private int id;
 
-        private UpdateCritterAsyncTask(CrittersDAO crittersDAO){
+        private UpdateCritterAsyncTask(CrittersDAO crittersDAO, int id){
             this.crittersDOA = crittersDAO;
+            this.id = id;
         }
 
         @Override
         protected Void doInBackground(Critters... critters) {
-            crittersDOA.insertCritters(critters[0]);
+
+            crittersDOA.updateDonated(id);
             return null;
         }
     }
+
+
+
 
 }

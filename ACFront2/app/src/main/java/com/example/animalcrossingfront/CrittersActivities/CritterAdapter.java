@@ -1,11 +1,13 @@
 package com.example.animalcrossingfront.CrittersActivities;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,9 @@ import java.util.List;
 
 public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterViewHolder> {
     private List<Critters> crittersList = new ArrayList<>();
+    private OnNoteListener mOnNoteListener;
+
+
 
     public static class CritterViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,7 +32,7 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
         public TextView crittersMonths;
         public TextView crittersPrice;
         public TextView crittersTime;
-        //        public TextView crittersDonated;
+        public TextView crittersDonated;
         public ImageView crittersImage;
 //        public Button updateDonated;
 
@@ -39,11 +44,9 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
             crittersMonths = v.findViewById(R.id.month_text);
             crittersPrice = v.findViewById(R.id.price_text);
             crittersTime = v.findViewById(R.id.time_text);
-//            crittersDonated = v.findViewById(R.id.donatedTextView);
-//            updateDonated= v.findViewById(R.id.viewDonated);
-
-
+            crittersDonated = v.findViewById(R.id.textDonated);
         }
+
     }
 
     @NonNull
@@ -51,6 +54,11 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
     public CritterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row, parent, false);
         return new CritterViewHolder(v);
+    }
+
+    public void addNoteClickListener(OnNoteListener noteListener)
+    {
+        this.mOnNoteListener = noteListener;
     }
 
     @Override
@@ -62,8 +70,19 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
         holder.crittersPrice.setText(crittersList2.getPrice());
         holder.crittersTime.setText(crittersList2.getTime());
         holder.crittersMonths.setText(crittersList2.getMonth());
-//        holder.crittersDonated.setText(crittersList2.getDonated());
-//        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.crittersImage);
+        holder.crittersDonated.setText(crittersList2.getDonated());
+        holder.crittersDonated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("donated", "Clicked");
+                int critterID = crittersList2.getId();
+                Log.d("donated2", String.valueOf(critterID));
+                Log.d("pos", String.valueOf(position));
+                mOnNoteListener.onNoteClick(critterID);
+            }
+        });
+
+
 
     }
     @Override
@@ -74,6 +93,10 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
     public void setCritter(List<Critters> crittersList){
         this.crittersList = crittersList;
         notifyDataSetChanged();
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 
 

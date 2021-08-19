@@ -1,17 +1,12 @@
 package com.example.animalcrossingfront;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -19,28 +14,13 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.animalcrossingfront.database.SharedPrefManager;
-import com.example.animalcrossingfront.database.User;
 import com.example.animalcrossingfront.database.UserAuth;
 import com.example.animalcrossingfront.database.VolleySingleton;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText sName, sEmail, sPassword, sConPassword;
@@ -66,15 +46,53 @@ public class RegisterActivity extends AppCompatActivity {
         backToStart.setOnClickListener(v -> backToHome());
 
     }
+//
+//    @Override
+//    protected void onPause()
+//    {
+//        super.onPause();
+//
+//        unbindDrawables(findViewById(R.id.registerView));
+//        System.gc();
+//    }
+//
+//
+//    @Override
+//    protected void onDestroy()
+//    {
+//        super.onDestroy();
+//
+//        unbindDrawables(findViewById(R.id.registerView));
+//        System.gc();
+//    }
+//
+//    private void unbindDrawables(View view)
+//    {
+//        if (view.getBackground() != null)
+//        {
+//            view.getBackground().setCallback(null);
+//        }
+//        if (view instanceof ViewGroup && !(view instanceof AdapterView))
+//        {
+//            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++)
+//            {
+//                unbindDrawables(((ViewGroup) view).getChildAt(i));
+//            }
+//            ((ViewGroup) view).removeAllViews();
+//        }
+//    }
+
+
 
     public void backToHome() {
-        Intent loginIntent = new Intent(this, StartActivity.class);
+        Intent loginIntent = new Intent(getApplicationContext(), StartActivity.class);
         startActivity(loginIntent);
     }
 
 
     public void registerUser() {
-        final Intent toLoginScreen = new Intent(this, StartActivity.class);
+        final Intent toLoginScreen = new Intent(getApplicationContext(), LoginActivity.class);
+        toLoginScreen.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -97,10 +115,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL_CHAR, newUserData, response -> {
 
-                            //                        String token = response.getString("access_token");
+                            String token = null;
+                            try {
+                                token = response.getString("access_token");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             setUserData(username, email, password);
-//                        Log.d("taken", token);
-//                        assignToken(token);
+                            Log.d("taken", token);
+                             assignToken(token);
                             logIn();
 
                             Toast.makeText(getApplicationContext(), "Reg Successful", Toast.LENGTH_SHORT).show();
@@ -110,17 +133,17 @@ public class RegisterActivity extends AppCompatActivity {
                         }, error -> {
                             Log.d("error", String.valueOf(error));
                             if (error instanceof NoConnectionError) {
-                                Toast.makeText(RegisterActivity.this, "NoConnection reg", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "NoConnection reg", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof TimeoutError) {
-                                Toast.makeText(RegisterActivity.this, "Connection time out reg", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Connection time out reg", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof AuthFailureError) {
-                                Toast.makeText(RegisterActivity.this, "Couldn't resolve login", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Couldn't resolve login", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof NetworkError) {
-                                Toast.makeText(RegisterActivity.this, "No network was found...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "No network was found...", Toast.LENGTH_SHORT).show();
                             }
                         });
                         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 3, 1.0f));
-                        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                        VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(jsonObjectRequest);
 
 
                     }

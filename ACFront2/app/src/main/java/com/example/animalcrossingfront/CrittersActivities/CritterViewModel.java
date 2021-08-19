@@ -16,6 +16,8 @@ public class CritterViewModel extends AndroidViewModel {
     private LiveData<List<Critters>> allBugs;
     private LiveData<List<Critters>> allFish;
     private LiveData<List<Critters>> allSeaCreatures;
+    private LiveData<List<Critters>> allDonated;
+
     private CritterRepository critterRepository;
 
     public CritterViewModel(@NonNull Application application) {
@@ -25,6 +27,7 @@ public class CritterViewModel extends AndroidViewModel {
         allBugs = critterRepository.getAllBugs();
         allFish = critterRepository.getAllFish();
         allSeaCreatures = critterRepository.getAllSeaCreatures();
+        allDonated= critterRepository.getAllDonated();
     }
     public LiveData<List<Critters>> getAllCritters(){
         return allCritters;
@@ -39,15 +42,16 @@ public class CritterViewModel extends AndroidViewModel {
     public LiveData<List<Critters>> getAllSeaCreatures(){
         return allSeaCreatures;
     }
+    public LiveData<List<Critters>> getAllDonated(){ return allDonated; }
 
+    public void updateDonated(int crittersID){
+        critterRepository.updateDonated(crittersID);
 
+    }
 
     public void insert(Critters critters) { critterRepository.insert(critters);};
 
-    public void updateDonated(Critters critters){
-        critterRepository.update(critters);
 
-    }
 
 
 }

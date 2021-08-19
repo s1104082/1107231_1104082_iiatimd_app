@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.animalcrossingfront.CrittersActivities.CritterAdapter;
 import com.example.animalcrossingfront.CrittersActivities.CritterViewModel;
 import com.example.animalcrossingfront.database.Critters;
+import com.example.animalcrossingfront.database.CrittersAppDatabase;
 import com.example.animalcrossingfront.database.UserAuth;
 import com.example.animalcrossingfront.database.VolleySingleton;
 
@@ -34,12 +36,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FragmentBugs extends Fragment {
-    private String url = "http://10.0.2.2:8000/api/critterstest";
-    //    private String IMAGE_url = "http://10.0.2.2:8000/";
+public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteListener{
+    private String url = "http://10.0.2.2:8000/api/critters";
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;
-//    private List<Critters> CrittersList;
     private RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
 
@@ -62,6 +62,8 @@ public class FragmentBugs extends Fragment {
         critterViewModel = new ViewModelProvider(getActivity()).get(CritterViewModel.class);
 
         critterViewModel.getAllBugs().observe(getActivity(), critters -> adapter.setCritter(critters));
+
+        ((CritterAdapter) adapter).addNoteClickListener(this);
 
        getAllData();
 
@@ -113,6 +115,13 @@ public class FragmentBugs extends Fragment {
 
     }
 
+
+    @Override
+    public void onNoteClick(int critterID) {
+        Log.d("TAG", "onNoteClick: pos"+ critterID);
+        critterViewModel.updateDonated(critterID);
+
+    }
 
 
 }

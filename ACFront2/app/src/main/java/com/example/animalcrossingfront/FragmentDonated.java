@@ -1,8 +1,6 @@
 package com.example.animalcrossingfront;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,31 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.animalcrossingfront.CrittersActivities.CritterAdapter;
 import com.example.animalcrossingfront.CrittersActivities.CritterViewModel;
-import com.example.animalcrossingfront.database.Critters;
-import com.example.animalcrossingfront.database.UserAuth;
-import com.example.animalcrossingfront.database.VolleySingleton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class FragmentSeaCreatures extends Fragment implements  CritterAdapter.OnNoteListener {
+public class FragmentDonated extends Fragment implements CritterAdapter.OnNoteListener {
 
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;
@@ -57,23 +38,18 @@ public class FragmentSeaCreatures extends Fragment implements  CritterAdapter.On
         recyclerView.setAdapter(adapter);
 
         critterViewModel = new ViewModelProvider(getActivity()).get(CritterViewModel.class);
-        critterViewModel.getAllSeaCreatures().observe(getActivity(), new Observer<List<Critters>>() {
-            @Override
-            public void onChanged(List<Critters> critters) {
-                adapter.setCritter(critters);
-            }
-        });
+        critterViewModel.getAllDonated().observe(getActivity(), crittersList -> adapter.setCritter(crittersList));
 
         ((CritterAdapter) adapter).addNoteClickListener(this);
 
         return rootView;
+
 
     }
 
 
     @Override
     public void onNoteClick(int position) {
-        Log.d("TAG", "onNoteClick: pos"+ position);
-        critterViewModel.updateDonated(position);
+
     }
 }

@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FragmentFish extends Fragment {
+public class FragmentFish extends Fragment implements  CritterAdapter.OnNoteListener{
 
 
     private CritterViewModel critterViewModel;
@@ -60,13 +60,17 @@ public class FragmentFish extends Fragment {
         critterViewModel = new ViewModelProvider(getActivity()).get(CritterViewModel.class);
         critterViewModel.getAllFish().observe(getActivity(), crittersList -> adapter.setCritter(crittersList));
 
+        ((CritterAdapter) adapter).addNoteClickListener(this);
+
         return rootView;
 
 
     }
 
 
-
-
-
+    @Override
+    public void onNoteClick(int position) {
+        Log.d("TAG", "onNoteClick: pos"+ position);
+        critterViewModel.updateDonated(position);
+    }
 }

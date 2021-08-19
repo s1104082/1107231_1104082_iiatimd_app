@@ -38,14 +38,6 @@
 
 
 
-        <activity android:name=".CrittersDingen.BugActivity" >
-        </activity>
-
-        <activity android:name=".CrittersDingen.FishActivity">
-        </activity>
-
-        <activity android:name=".CrittersDingen.SeaCreaturesActivity" >
-        </activity>
 
         <activity android:name=".TrackerActivity"  >
         </activity>

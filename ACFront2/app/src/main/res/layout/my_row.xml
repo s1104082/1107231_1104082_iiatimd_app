@@ -32,15 +32,25 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.017"
+                app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/month_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Month"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/location_text"
+                app:layout_constraintTop_toBottomOf="@+id/location_text" />
 
             <TextView
                 android:id="@+id/location_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
+                android:layout_marginStart="24dp"
                 android:text="Location"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -66,16 +76,6 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/location_text"
                 app:layout_constraintTop_toBottomOf="@+id/time_text" />
-
-            <TextView
-                android:id="@+id/month_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Month"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/location_text"
-                app:layout_constraintTop_toBottomOf="@+id/location_text" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -131,6 +131,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.025"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textDonated"
+                android:layout_width="92sp"
+                android:layout_height="wrap_content"
+                android:background="@color/buttonColor"
+                android:padding="5sp"
+                android:text="Donated"
+                android:textAlignment="center"
+                android:textColor="@color/buttonTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView9"
+                app:layout_constraintHorizontal_bias="0.294"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.859" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

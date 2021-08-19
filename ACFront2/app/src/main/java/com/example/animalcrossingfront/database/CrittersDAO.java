@@ -15,17 +15,20 @@ public interface CrittersDAO {
     @Query("SELECT * FROM Critters")
     LiveData<List<Critters>> getAllCritters();
 
-    @Query("SELECT * FROM Critters where species = 'Bug'")
+    @Query("SELECT * FROM Critters where species = 'Bug' and donated = 'Not Donated'")
     LiveData<List<Critters>> getAllBugs();
 
-    @Query("SELECT * FROM Critters where species = 'Fish'")
+    @Query("SELECT * FROM Critters where species = 'Fish' and donated = 'Not Donated'")
     LiveData<List<Critters>> getAllFish();
 
-    @Query("SELECT * FROM Critters where species = 'Sea Creature'")
+    @Query("SELECT * FROM Critters where species = 'Sea Creature' and donated = 'Not Donated'")
     LiveData<List<Critters>> getAllSeaCreatures();
 
+    @Query("SELECT * FROM Critters where donated = 'Donated'")
+    LiveData<List<Critters>> getAllDonated();
 
-
+    @Query("UPDATE Critters set donated = 'Donated' where id = :id")
+    void updateDonated(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCritters(Critters critters);

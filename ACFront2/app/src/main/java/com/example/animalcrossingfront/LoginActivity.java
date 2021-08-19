@@ -1,13 +1,8 @@
 package com.example.animalcrossingfront;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,20 +14,13 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.example.animalcrossingfront.database.SharedPrefManager;
 import com.example.animalcrossingfront.database.UserAuth;
 import com.example.animalcrossingfront.database.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     EditText sName, sEmail, sPassword, sConPassword;
@@ -42,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         sName = (EditText) findViewById(R.id.editRegisterName);
         sEmail = (EditText) findViewById(R.id.editRegisterEmailAddress);
@@ -56,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(toHomeScreen);
 
         }
-        setContentView(R.layout.activity_login);
 
         Button registerButton = findViewById(R.id.loginButton);
         registerButton.setOnClickListener(v -> LoginUser());
@@ -66,10 +54,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
+
     public void backToHome(){
         Intent loginIntent = new Intent(this, StartActivity.class);
         startActivity(loginIntent);
-
     }
 
 
@@ -83,23 +73,18 @@ public class LoginActivity extends AppCompatActivity {
         String URL_Login  = "http://10.0.2.2:8000/api/login?email=" + email + "&password=" + password;
 
         JSONObject user = getLoginData(email, password);
-        final Context context = this;
+
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, URL_Login, user, response -> {
             Log.d("response", response.toString());
             try {
               token = response.getString("access_token");
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString("userToken", token);
-                editor.apply();
-
 
             } catch (JSONException e) {
                     e.printStackTrace();
             }
             AuthenticateUser(email, password, token, true);
-            Intent toMainScreenIntent = new Intent(context, TrackerActivity.class);
+            Intent toMainScreenIntent = new Intent(LoginActivity.this, TrackerActivity.class);
             startActivity(toMainScreenIntent);
 
         }, error -> {
@@ -116,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
         jor.setRetryPolicy(new DefaultRetryPolicy(10000, 3, 1.0f));
         VolleySingleton.getInstance(this).addToRequestQueue(jor);
     }
-
 
 
     private JSONObject getLoginData(String email, String password){
