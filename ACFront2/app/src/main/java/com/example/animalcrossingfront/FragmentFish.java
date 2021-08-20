@@ -63,8 +63,6 @@ public class FragmentFish extends Fragment implements  CritterAdapter.OnNoteList
         ((CritterAdapter) adapter).addNoteClickListener(this);
 
         return rootView;
-
-
     }
 
 

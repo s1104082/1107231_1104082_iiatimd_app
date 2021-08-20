@@ -65,7 +65,14 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
 
         ((CritterAdapter) adapter).addNoteClickListener(this);
 
-       getAllData();
+        Log.d("get all critters", String.valueOf(critterViewModel.getAllCritters().getValue()));
+
+        if(critterViewModel.getAllCritters().getValue() == null){
+            getAllData();
+
+        }
+
+
 
         return rootView;
 
@@ -96,12 +103,7 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
             }
             adapter.notifyDataSetChanged();
 
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", error.toString());
-            }
-        }) {
+        }, error -> Log.e("Volley", error.toString())) {
             @Override
             public Map getHeaders() throws AuthFailureError {
                 String token = UserAuth.getInstance(getActivity().getApplicationContext()).getToken();
@@ -110,7 +112,7 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
                 return headers;
             }
         };
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 3, 1.0f));
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
 
     }
@@ -127,9 +129,6 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
         if(donated.equals("Donated")){
             critterViewModel.updateNotDonated(critterID);
         }
-
-
-
 
     }
 

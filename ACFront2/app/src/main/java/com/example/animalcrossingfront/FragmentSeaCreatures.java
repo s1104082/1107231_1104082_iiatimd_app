@@ -57,15 +57,9 @@ public class FragmentSeaCreatures extends Fragment implements  CritterAdapter.On
         recyclerView.setAdapter(adapter);
 
         critterViewModel = new ViewModelProvider(getActivity()).get(CritterViewModel.class);
-        critterViewModel.getAllSeaCreatures().observe(getActivity(), new Observer<List<Critters>>() {
-            @Override
-            public void onChanged(List<Critters> critters) {
-                adapter.setCritter(critters);
-            }
-        });
+        critterViewModel.getAllSeaCreatures().observe(getActivity(), critters -> adapter.setCritter(critters));
 
         ((CritterAdapter) adapter).addNoteClickListener(this);
-
         return rootView;
 
     }
