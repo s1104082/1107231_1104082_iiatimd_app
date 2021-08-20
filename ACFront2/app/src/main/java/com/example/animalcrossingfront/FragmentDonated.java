@@ -1,6 +1,7 @@
 package com.example.animalcrossingfront;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,15 @@ public class FragmentDonated extends Fragment implements CritterAdapter.OnNoteLi
 
 
     @Override
-    public void onNoteClick(int position) {
+    public void onNoteClick(int position, String donated) {
+        Log.d("TAG", "onNoteClick: pos"+ position);
+        Log.d("clickclick", donated);
+        if(donated.equals("Not Donated")){
+            critterViewModel.updateDonated(position);
+        }
 
+        if(donated.equals("Donated")){
+            critterViewModel.updateNotDonated(position);
+        }
     }
 }

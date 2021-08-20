@@ -72,8 +72,15 @@ public class FragmentSeaCreatures extends Fragment implements  CritterAdapter.On
 
 
     @Override
-    public void onNoteClick(int position) {
-        Log.d("TAG", "onNoteClick: pos"+ position);
-        critterViewModel.updateDonated(position);
+    public void onNoteClick(int critterID, String donated) {
+        Log.d("TAG", "onNoteClick: pos"+ critterID);
+        Log.d("clickclick", donated);
+        if(donated.equals("Not Donated")){
+            critterViewModel.updateDonated(critterID);
+        }
+
+        if(donated.equals("Donated")){
+            critterViewModel.updateNotDonated(critterID);
+        }
     }
 }

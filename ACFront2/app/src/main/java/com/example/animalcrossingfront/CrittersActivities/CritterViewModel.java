@@ -49,6 +49,12 @@ public class CritterViewModel extends AndroidViewModel {
 
     }
 
+    public void updateNotDonated(int crittersID){
+        critterRepository.updateNotDonated(crittersID);
+
+    }
+
+
     public void insert(Critters critters) { critterRepository.insert(critters);};
 
 

@@ -7,17 +7,26 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import static android.content.ContentValues.TAG;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
 
     @Override
     public void onNewToken(String token){
-        Log.d("refresh", token);
+        super.onNewToken(token);
+        Log.d("taken", "onNewToken: " + token);
+
     }
 
     @Override
@@ -44,4 +53,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.createNotificationChannel(channel);
         notificationManager.notify(0, notificationBuilder.build());
     }
+
 }

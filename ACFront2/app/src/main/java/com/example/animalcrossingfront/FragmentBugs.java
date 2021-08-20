@@ -117,9 +117,19 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
 
 
     @Override
-    public void onNoteClick(int critterID) {
+    public void onNoteClick(int critterID, String donated) {
         Log.d("TAG", "onNoteClick: pos"+ critterID);
-        critterViewModel.updateDonated(critterID);
+        Log.d("clickclick", donated);
+        if(donated.equals("Not Donated")){
+            critterViewModel.updateDonated(critterID);
+        }
+
+        if(donated.equals("Donated")){
+            critterViewModel.updateNotDonated(critterID);
+        }
+
+
+
 
     }
 

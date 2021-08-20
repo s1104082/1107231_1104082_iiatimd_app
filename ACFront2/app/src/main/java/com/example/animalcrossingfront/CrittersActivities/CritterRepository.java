@@ -48,6 +48,12 @@ public class CritterRepository {
     }
 
 
+    public void updateNotDonated(int crittersId){
+        new UpdateNotDonatedAsyncTask(crittersDAO, crittersId).execute();
+
+    }
+
+
     private static class InsertCritterAsyncTask extends AsyncTask<Critters, Void, Void> {
 
         private CrittersDAO crittersDOA;
@@ -68,7 +74,7 @@ public class CritterRepository {
         private CrittersDAO crittersDOA;
         private int id;
 
-        private UpdateCritterAsyncTask(CrittersDAO crittersDAO, int id){
+        private UpdateCritterAsyncTask(CrittersDAO crittersDAO, int id) {
             this.crittersDOA = crittersDAO;
             this.id = id;
         }
@@ -79,8 +85,30 @@ public class CritterRepository {
             crittersDOA.updateDonated(id);
             return null;
         }
+
     }
 
+    private static class UpdateNotDonatedAsyncTask extends AsyncTask<Critters, Void, Void> {
+
+        private CrittersDAO crittersDOA;
+        private int id;
+
+        private UpdateNotDonatedAsyncTask(CrittersDAO crittersDAO, int id){
+            this.crittersDOA = crittersDAO;
+            this.id = id;
+        }
+
+        @Override
+        protected Void doInBackground(Critters... critters) {
+
+            crittersDOA.updateNotDonated(id);
+            return null;
+        }
+
+
+
+
+    }
 
 
 

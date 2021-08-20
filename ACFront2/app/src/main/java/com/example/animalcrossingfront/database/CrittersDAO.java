@@ -30,6 +30,10 @@ public interface CrittersDAO {
     @Query("UPDATE Critters set donated = 'Donated' where id = :id")
     void updateDonated(int id);
 
+    @Query("UPDATE Critters set donated = 'Not Donated' where id = :id")
+    void updateNotDonated(int id);
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCritters(Critters critters);
 

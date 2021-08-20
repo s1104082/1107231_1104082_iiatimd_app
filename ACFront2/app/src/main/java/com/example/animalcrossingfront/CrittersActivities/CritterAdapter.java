@@ -76,9 +76,11 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
             public void onClick(View v) {
                 Log.d("donated", "Clicked");
                 int critterID = crittersList2.getId();
+                String donated = crittersList2.getDonated();
+                Log.d("isdonated?", donated);
                 Log.d("donated2", String.valueOf(critterID));
                 Log.d("pos", String.valueOf(position));
-                mOnNoteListener.onNoteClick(critterID);
+                mOnNoteListener.onNoteClick(critterID, donated);
             }
         });
 
@@ -96,7 +98,7 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
     }
 
     public interface OnNoteListener{
-        void onNoteClick(int position);
+        void onNoteClick(int position, String donated);
     }
 
 
