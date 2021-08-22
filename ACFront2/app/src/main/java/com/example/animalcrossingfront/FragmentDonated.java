@@ -17,7 +17,7 @@ import com.example.animalcrossingfront.CrittersActivities.CritterAdapter;
 import com.example.animalcrossingfront.CrittersActivities.CritterViewModel;
 
 public class FragmentDonated extends Fragment implements CritterAdapter.OnNoteListener {
-
+// 19-08-21 @Charlaine made donatedfragment/tab
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;
 

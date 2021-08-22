@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FragmentSeaCreatures extends Fragment implements  CritterAdapter.OnNoteListener {
+    //    @Casper Created fragment with original code
+//   16-08-21 @Charlaine changed code at @Casper from array to get from api to room database
 
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;

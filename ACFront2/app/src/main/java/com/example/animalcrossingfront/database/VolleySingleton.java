@@ -33,8 +33,6 @@ public class VolleySingleton extends Application {
         return instance;
     }
 
-
-
     public RequestQueue getRequestQueue() {
         if (requestQueue == null){
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());

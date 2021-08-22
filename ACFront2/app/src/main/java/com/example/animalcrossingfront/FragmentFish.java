@@ -35,7 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FragmentFish extends Fragment implements  CritterAdapter.OnNoteListener{
-
+    //    @Casper Created fragment with original code
+//   18-08-21 @Charlaine changed code at @Casper from array to get from api to room database
 
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;
@@ -64,7 +65,6 @@ public class FragmentFish extends Fragment implements  CritterAdapter.OnNoteList
 
         return rootView;
     }
-
 
     @Override
     public void onNoteClick(int critterID, String donated) {

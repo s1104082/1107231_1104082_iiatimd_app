@@ -1,5 +1,5 @@
 package com.example.animalcrossingfront.database;
-
+//@Charlaine For Info
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

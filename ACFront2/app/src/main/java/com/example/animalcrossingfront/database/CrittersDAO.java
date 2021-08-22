@@ -1,5 +1,5 @@
 package com.example.animalcrossingfront.database;
-
+//@Charlaine For Info
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Index;

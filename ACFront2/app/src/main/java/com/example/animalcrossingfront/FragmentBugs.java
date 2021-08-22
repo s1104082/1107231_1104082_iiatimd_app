@@ -1,6 +1,7 @@
 package com.example.animalcrossingfront;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.example.animalcrossingfront.CrittersActivities.CritterAdapter;
 import com.example.animalcrossingfront.CrittersActivities.CritterViewModel;
 import com.example.animalcrossingfront.database.Critters;
 import com.example.animalcrossingfront.database.CrittersAppDatabase;
+import com.example.animalcrossingfront.database.User;
 import com.example.animalcrossingfront.database.UserAuth;
 import com.example.animalcrossingfront.database.VolleySingleton;
 
@@ -36,12 +38,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteListener{
+public class FragmentBugs extends Fragment implements  CritterAdapter.OnNoteListener{
+    //    @Casper Created fragment with original code
+//   05-07-21 @Charlaine changed code at @Casper from array to get from api to room database
+
     private String url = "http://10.0.2.2:8000/api/critters";
     private CritterViewModel critterViewModel;
     private LinearLayoutManager linearLayoutManager;
-    private RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
+    boolean test = true;
 
 
     @Nullable
@@ -65,20 +70,17 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
 
         ((CritterAdapter) adapter).addNoteClickListener(this);
 
-        Log.d("get all critters", String.valueOf(critterViewModel.getAllCritters().getValue()));
-
-        if(critterViewModel.getAllCritters().getValue() == null){
+        if(test){
             getAllData();
-
+            test = false;
         }
-
-
 
         return rootView;
 
     }
 
     public void getAllData(){
+
         final CritterAdapter adapter = new CritterAdapter();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, response -> {
@@ -103,20 +105,23 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
             }
             adapter.notifyDataSetChanged();
 
-        }, error -> Log.e("Volley", error.toString())) {
+        }
+        , error -> Log.e("Volley", error.toString())) {
             @Override
-            public Map getHeaders() throws AuthFailureError {
-                String token = UserAuth.getInstance(getActivity().getApplicationContext()).getToken();
-                Map headers = new HashMap();
-                headers.put("Authorization", "Bearer " + token);
-                return headers;
+            public Map<String,String> getHeaders() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                SharedPreferences preferences = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                String token = preferences.getString("token","");
+                Log.d("authtoken", "getHeaders: " + token);
+
+                params.put("Authorization", token);
+                return params;
             }
         };
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
-
     }
-
 
     @Override
     public void onNoteClick(int critterID, String donated) {
@@ -129,7 +134,6 @@ public class FragmentBugs extends Fragment  implements  CritterAdapter.OnNoteLis
         if(donated.equals("Donated")){
             critterViewModel.updateNotDonated(critterID);
         }
-
     }
 
 

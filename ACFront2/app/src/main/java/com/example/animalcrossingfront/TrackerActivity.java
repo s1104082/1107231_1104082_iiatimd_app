@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 
 public class TrackerActivity extends AppCompatActivity {
-
+//  @Casper for Code Info
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +31,14 @@ public class TrackerActivity extends AppCompatActivity {
 
 
 
-
-
-
 //
 //        //bundle uitlezen
 //        Bundle myBundle = getIntent().getExtras();
 //        TextView title = (TextView)findViewById(R.id.title);
 //        title.setText("Hello, " + myBundle.getString("name"));
     }
+
+
+
+
 }

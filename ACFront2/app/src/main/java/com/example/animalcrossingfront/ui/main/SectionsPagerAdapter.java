@@ -22,6 +22,8 @@ import com.example.animalcrossingfront.R;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    //    @Casper For Code Info
+    // 19-08-21 @Charlaine added donatedfragment.
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4};
@@ -62,7 +64,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
+        // Show 4 total pages.
         return 4;
     }
 }

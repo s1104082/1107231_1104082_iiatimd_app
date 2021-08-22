@@ -23,8 +23,6 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
     private List<Critters> crittersList = new ArrayList<>();
     private OnNoteListener mOnNoteListener;
 
-
-
     public static class CritterViewHolder extends RecyclerView.ViewHolder {
 
         public TextView crittersName;
@@ -83,8 +81,6 @@ public class CritterAdapter extends RecyclerView.Adapter<CritterAdapter.CritterV
                 mOnNoteListener.onNoteClick(critterID, donated);
             }
         });
-
-
 
     }
     @Override
