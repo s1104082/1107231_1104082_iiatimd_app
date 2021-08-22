@@ -1,4 +1,4 @@
-package com.example.iiatimd_charsper_app.ui.main;
+package com.example.animalcrossingfront.ui.main;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 public class PageViewModel extends ViewModel {
+//    @Casper For Code Info
 
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
     private LiveData<String> mText = Transformations.map(mIndex, new Function<Integer, String>() {

@@ -9,7 +9,11 @@
       "client_info": {
         "mobilesdk_app_id": "1:548020451092:android:d7e6b406f1b00d5c3df401",
         "android_client_info": {
+<<<<<<< HEAD
           "package_name": "com.example.iiatimd_charsper_app"
+=======
+          "package_name": "com.example.animalcrossingfront"
+>>>>>>> Char_backend
         }
       },
       "oauth_client": [

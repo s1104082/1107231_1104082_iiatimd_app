@@ -1,4 +1,4 @@
-package com.example.iiatimd_charsper_app;
+package com.example.animalcrossingfront;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,57 +6,76 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FragmentFish extends Fragment implements FragmentAdapter.OnNoteListener {
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.animalcrossingfront.CrittersActivities.CritterAdapter;
+import com.example.animalcrossingfront.CrittersActivities.CritterViewModel;
+import com.example.animalcrossingfront.database.Critters;
+import com.example.animalcrossingfront.database.UserAuth;
+import com.example.animalcrossingfront.database.VolleySingleton;
 
-    Context thiscontext;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class FragmentFish extends Fragment implements  CritterAdapter.OnNoteListener{
+    //    @Casper Created fragment with original code
+//   18-08-21 @Charlaine changed code at @Casper from array to get from api to room database
+
+    private CritterViewModel critterViewModel;
+    private LinearLayoutManager linearLayoutManager;
 
     RecyclerView recyclerView;
-
-    String s1[], s2[], s3[], s4[], s5[];
-    int fishimages[] = {R.drawable.tarantula, R.drawable.ladybug, R.drawable.scorpion, R.drawable.wasp};
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //array invullen
-        s1 = getResources().getStringArray(R.array.fish_name_array);
-        s2 = getResources().getStringArray(R.array.fish_location_array);
-        s3 = getResources().getStringArray(R.array.fish_month_array);
-        s4 = getResources().getStringArray(R.array.fish_time_array);
-        s5 = getResources().getStringArray(R.array.fish_price_array);
-
         View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
         recyclerView = rootView.findViewById(R.id.RecyclerView);
 
-        thiscontext = container.getContext();
-        FragmentAdapter myAdapter = new FragmentAdapter(thiscontext, s1, s2, s3, s4, s5, fishimages, this);
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
+        final CritterAdapter adapter = new CritterAdapter();
+        recyclerView.setAdapter(adapter);
+
+        critterViewModel = new ViewModelProvider(getActivity()).get(CritterViewModel.class);
+        critterViewModel.getAllFish().observe(getActivity(), crittersList -> adapter.setCritter(crittersList));
+
+        ((CritterAdapter) adapter).addNoteClickListener(this);
 
         return rootView;
-
-
     }
 
     @Override
-    public void onNoteClick(int position) {
-        Log.d("TAG", "onNoteClick: pos"+ position);
+    public void onNoteClick(int critterID, String donated) {
+        Log.d("TAG", "onNoteClick: pos"+ critterID);
+        Log.d("clickclick", donated);
+        if(donated.equals("Not Donated")){
+            critterViewModel.updateDonated(critterID);
+        }
 
-        ImageView imageView = (ImageView) getActivity().findViewById(R.id.ImageView);
-        if (imageView.getVisibility() == View.VISIBLE){
-            imageView.setVisibility(View.INVISIBLE);
-        } else{
-            imageView.setVisibility(View.VISIBLE);
+        if(donated.equals("Donated")){
+            critterViewModel.updateNotDonated(critterID);
         }
     }
 }
